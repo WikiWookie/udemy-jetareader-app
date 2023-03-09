@@ -20,13 +20,15 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
+import com.example.jetareader.components.ReaderLogo
+import com.example.jetareader.navigation.ReaderScreens
 import kotlinx.coroutines.delay
 
 
-// For some reason the splash screen isn't taking up the whole screen
-@Preview
+// TODO: For some reason the splash screen isn't taking up the whole screen
+// @Preview // NavController = NavController(context = LocalContext.current)
 @Composable
-fun ReaderSplashScreen(navController: NavController = NavController(context = LocalContext.current)) {
+fun ReaderSplashScreen(navController: NavController) {
     val scale = remember { Animatable(0f) }
 
     LaunchedEffect(key1 = true) {
@@ -40,6 +42,7 @@ fun ReaderSplashScreen(navController: NavController = NavController(context = Lo
             )
         )
         delay(2000L)
+        navController.navigate(ReaderScreens.LoginScreen.name)
     }
 
     Surface(
@@ -58,11 +61,7 @@ fun ReaderSplashScreen(navController: NavController = NavController(context = Lo
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.Center
         ) {
-            Text(
-                text = "A. Reader",
-                style = MaterialTheme.typography.h3,
-                color = Color.Red.copy(alpha = 0.5f)
-            )
+            ReaderLogo()
             Spacer(modifier = Modifier.height(15.dp))
             Text(
                 text = "\"Read. Change. Yourself.\"",
