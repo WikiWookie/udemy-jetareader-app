@@ -41,6 +41,9 @@ class LoginScreenViewModel : ViewModel() {
             auth.createUserWithEmailAndPassword(email, password)
                 .addOnCompleteListener() { task ->
                     if (task.isSuccessful) {
+                        // me@gmail.com
+                        val displayName = task.result?.user?.email?.split('@')?.get(0)
+                        createUser(displayName)
                         home()
                     } else {
                         Log.d("FB", "createUserWithEmailAndPassword exception")
@@ -48,5 +51,9 @@ class LoginScreenViewModel : ViewModel() {
                     _loading.value = false
                 }
         }
+    }
+
+    private fun createUser(displayName: String?) {
+
     }
 }
